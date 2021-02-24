@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { CountForm } from './components/CountForm';
 
 function App() {
   // Declare a new state variable, which we'll call "count"
@@ -16,18 +17,8 @@ function App() {
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
-    <div>
-      <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>
-        Click me
-      </button>
-    </div>
-    <div>
-      <p>You2 clicked {count2} times</p>
-      <button onClick={() => setCount2(count2 + 1)}>
-        Click2 me
-      </button>
-    </div>
+        <CountForm count={count} setCount={setCount}></CountForm>
+        <CountForm count={count2} setCount={setCount2}></CountForm>
         <a
           className="App-link"
           href="https://reactjs.org"

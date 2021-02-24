@@ -7,11 +7,7 @@ function App() {
   const [count, setCount] = useState(0)
   const [count2, setCount2] = useState(0)
 
-  useEffect(() => {
-    document.title = `You clicked ${count} times`;
-    console.log(`count ${count} times`)
-    console.log(`count2 ${count2} times`)
-  }, [count]);
+  useCount(count)
   
   return (
     <div className="App">
@@ -43,6 +39,14 @@ function App() {
       </header>
     </div>
   );
+}
+
+function useCount(count: number) {
+  useEffect(() => {
+    document.title = `You clicked ${count} times`;
+    console.log(`count ${count} times`)
+  }, [count]);
+  return count
 }
 
 export default App;

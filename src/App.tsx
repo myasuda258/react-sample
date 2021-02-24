@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
   // Declare a new state variable, which we'll call "count"
   const [count, setCount] = useState(0)
+  const [count2, setCount2] = useState(0)
 
+  useEffect(() => {
+    document.title = `You clicked ${count} times`;
+    console.log(`count ${count} times`)
+    console.log(`count2 ${count2} times`)
+  }, [count]);
+  
   return (
     <div className="App">
       <header className="App-header">
@@ -17,6 +24,12 @@ function App() {
       <p>You clicked {count} times</p>
       <button onClick={() => setCount(count + 1)}>
         Click me
+      </button>
+    </div>
+    <div>
+      <p>You2 clicked {count2} times</p>
+      <button onClick={() => setCount2(count2 + 1)}>
+        Click2 me
       </button>
     </div>
         <a

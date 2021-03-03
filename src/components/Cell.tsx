@@ -6,21 +6,22 @@ interface OwnProps {
    * 9: this is mine
    */
   type?: number
-  status: Array<Array<boolean>>
+  status: boolean
   x: number
   y: number
-  onClick: Function
+  onClick?: Function
 }
 
 type Props = OwnProps
 export const Cell : React.FC<Props> = props => {
-  console.log(props.x,props.y)
+  // console.log(props.x,props.y)
   return(
     <button
       className="square"
-      onClick={() => {props.onClick(props.x, props.y)}}
+      onClick = {()=>{console.log('x,y:::', props.x, props.y)}}
+      // onClick={() => {props.onClick(props.x, props.y)}}
     >
-      {props.status[props.x][props.y] ? (props.type || '__|') : ' '}
+      {props.status ? (props.type || '__|') : ' '}
     </button>
   )
 }

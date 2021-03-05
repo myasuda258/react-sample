@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 interface OwnProps {
   /**
@@ -9,7 +9,7 @@ interface OwnProps {
   status: boolean
   x: number
   y: number
-  onClick?: Function
+  onClick: Function
 }
 
 type Props = OwnProps
@@ -18,10 +18,13 @@ export const Cell : React.FC<Props> = props => {
   return(
     <button
       className="square"
-      onClick = {()=>{console.log('x,y:::', props.x, props.y)}}
+      onClick = {()=>{console.log('x,y:::', props.x, props.y);props.onClick(props.x, props.y)}}
       // onClick={() => {props.onClick(props.x, props.y)}}
     >
-      {props.status ? (props.type || '__|') : ' '}
+      {
+      // props.status ? (props.type || '__|') : ' '
+      props.status ? 'X': ''
+      }
     </button>
   )
 }

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { CountForm } from './components/CountForm';
 import { Cell } from './components/Cell';
 
 const initialStatus: boolean[][] = [
@@ -13,14 +12,9 @@ const initialStatus: boolean[][] = [
 ]
 
 function App() {
-  // Declare a new state variable, which we'll call "count"
-  // const [count, setCount] = useState(0)
-  // const [count2, setCount2] = useState(0)
-  // const [status, setStatus] = useState(Array(5).fill(Array(5).fill(false)))
-  // const [type, setType] = useState(Array(5).fill(Array(5)))
   const [status, setStatus] = useState(initialStatus)
 
-  function openCell(x:number, y:number) {
+  function handleCellClick(x:number, y:number) {
     console.log('open: ',x,y,status[x][y])
     const status_ = status
     status_[x][y] = true
@@ -33,9 +27,11 @@ function App() {
     return (
       row.map((r: boolean, index: number)=>{
       return (<Cell
+        key={index}
         status={r}
         x={index}
         y={y}
+        onClick={handleCellClick}
       />
       )
     })
@@ -71,14 +67,6 @@ function App() {
       </header>
     </div>
   );
-}
-
-function useCount(count: number) {
-  useEffect(() => {
-    document.title = `You clicked ${count} times`;
-    console.log(`count ${count} times`)
-  }, [count]);
-  return count
 }
 
 export default App;

@@ -16,7 +16,7 @@ type Props = OwnProps
 export const Cell : React.FC<Props> = props => {
   const isOpen = props.status
   const buttonStyles = isOpen ? {background: '#FFF'} : {background: '#CCC'}
-  const buttonBody = isOpen ? props.type : ''
+  const buttonBody = isOpen ? (props.type === 0 ? '' : props.type === 9 ? '*' : props.type) : ''
   const handleClick = (e: React.MouseEvent) => {
     props.onClick()
   }

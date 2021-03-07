@@ -11,8 +11,17 @@ const initialStatus: boolean[][] = [
   [false, false, false, false, false]
 ]
 
+const initialTypes: number[][] = [
+  [0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0]
+]
+
 function App() {
   const [status, setStatus] = useState(initialStatus)
+  const [types, setTypes] = useState(initialTypes)
 
   const handleCellClick = function(x:number, y:number) {
     console.log('open: ',x,y,status[y][x],'->',!status[y][x])
@@ -29,7 +38,8 @@ function App() {
         status={r}
         x={index}
         y={y}
-        onClick={handleCellClick}
+        type={types[y][index]}
+        onClick={() => handleCellClick(index, y)}
       />
       )
     })

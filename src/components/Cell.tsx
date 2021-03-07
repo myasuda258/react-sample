@@ -9,22 +9,24 @@ interface OwnProps {
   status: boolean
   x: number
   y: number
-  onClick: (x: number, y:number) => void
+  onClick: () => void
 }
 
 type Props = OwnProps
 export const Cell : React.FC<Props> = props => {
+  const isOpen = props.status
+  const buttonStyles = isOpen ? {background: '#FFF'} : {background: '#CCC'}
+  const buttonBody = isOpen ? props.type : ''
   const handleClick = (e: React.MouseEvent) => {
-    props.onClick(props.x,props.y)
+    props.onClick()
   }
   return(
     <button
       className="square"
-      onClick={handleClick}
+      onClick={isOpen ? ()=>{} : handleClick}
+      style={buttonStyles}
     >
-      {
-      props.status ? 'X' : ' '
-      }
+      {buttonBody}
     </button>
   )
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 interface OwnProps {
   /**
@@ -9,21 +9,21 @@ interface OwnProps {
   status: boolean
   x: number
   y: number
-  onClick: Function
+  onClick: (x: number, y:number) => void
 }
 
 type Props = OwnProps
 export const Cell : React.FC<Props> = props => {
-  // console.log(props.x,props.y)
+  const handleClick = (e: React.MouseEvent) => {
+    props.onClick(props.x,props.y)
+  }
   return(
     <button
       className="square"
-      onClick = {()=>{console.log('x,y:::', props.x, props.y);props.onClick(props.x, props.y)}}
-      // onClick={() => {props.onClick(props.x, props.y)}}
+      onClick={handleClick}
     >
       {
-      // props.status ? (props.type || '__|') : ' '
-      props.status ? 'X': ''
+      props.status ? 'X' : ' '
       }
     </button>
   )

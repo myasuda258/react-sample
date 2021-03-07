@@ -14,20 +14,18 @@ const initialStatus: boolean[][] = [
 function App() {
   const [status, setStatus] = useState(initialStatus)
 
-  function handleCellClick(x:number, y:number) {
-    console.log('open: ',x,y,status[x][y])
-    const status_ = status
-    status_[x][y] = true
+  const handleCellClick = function(x:number, y:number) {
+    console.log('open: ',x,y,status[y][x],'->',!status[y][x])
+    const status_ = JSON.parse(JSON.stringify(status))
+    status_[y][x] = !status_[y][x]
     setStatus(status_)
   }
-
-  // useCount(count)
 
   const cellColumns = function(row: boolean[], y: number) {
     return (
       row.map((r: boolean, index: number)=>{
       return (<Cell
-        key={index}
+        key={y * status.length + index}
         status={r}
         x={index}
         y={y}
@@ -50,9 +48,9 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-          <div>
-            {cellRows}
-          </div>
+        <div>
+          {cellRows}
+        </div>
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>

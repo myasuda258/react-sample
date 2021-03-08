@@ -63,24 +63,44 @@ function App() {
 
   const initTypes = (num: number) => {
     console.log('inittype')
-    setMine(num)
+    // setMine(num)
     // setNumber()
     console.log('end____inittype')
   }
 
-  const setMine = (num: number) => {
+  const generateNgList = (n: number) => {
+    const ng_list = []
+    if (n > 0) {
+      ng_list.push(n - 1)
+    }
+    ng_list.push(n)
+    if (n < LENGTH_TABLE_SIZE-1) {
+      ng_list.push(n + 1)
+    }
+    return ng_list
+  }
+
+  const setMine = (x_clicked: number, y_clicked: number, num: number) => {
+    const list_ng_x = generateNgList(x_clicked)
+    const list_ng_y = generateNgList(y_clicked)
+    
     let x,y
     const types_: number[][] = JSON.parse(JSON.stringify(initialTypes))
+
+    const isAroundFirstClick = (x_: number, y_:number) => {
+      return list_ng_x.includes(x_) && list_ng_y.includes(y_)
+    }
+
     // 引数の数分ループ
     for(let i = 0; i<num; i++) {
       do {
         x = Math.floor(Math.random() * LENGTH_TABLE_SIZE)
         y = Math.floor(Math.random() * LENGTH_TABLE_SIZE)
-      } while (types_[y][x] === 9)
+      } while (isAroundFirstClick(x, y) || types_[y][x] === 9)
       types_[y][x] = 9
       console.log('init Types: ', x, y)
     }
-    console.log(JSON.parse(JSON.stringify(types_)))
+    // console.log(JSON.parse(JSON.stringify(types_)))
     // setNumber(types_)
     
     // 数字の設定
@@ -128,6 +148,9 @@ function App() {
   }
 
   const handleCellClick = function(x:number, y:number) {
+    if (gameStatus === 'YET') {
+      setMine(x, y, 5)
+    }
     console.log('open: ',x,y,status[y][x],'->',!status[y][x])
     const status_ = JSON.parse(JSON.stringify(status))
     status_[y][x] = !status_[y][x]

@@ -4,6 +4,8 @@ import './App.css';
 import { Cell } from './components/Cell';
 
 const LENGTH_TABLE_SIZE = 5
+const NUMBER_OF_MINES = 5
+const TYPE_OF_MINE = 9
 
 const initialStatus: boolean[][] = [
   [false, false, false, false, false],
@@ -52,7 +54,7 @@ function App() {
     console.log('init')
     setGameStatus('')
     setStatus(initialStatus)
-    initTypes(5)
+    initTypes(NUMBER_OF_MINES)
   }
 
   const allOpen = ()=>{
@@ -96,8 +98,8 @@ function App() {
       do {
         x = Math.floor(Math.random() * LENGTH_TABLE_SIZE)
         y = Math.floor(Math.random() * LENGTH_TABLE_SIZE)
-      } while (isAroundFirstClick(x, y) || types_[y][x] === 9)
-      types_[y][x] = 9
+      } while (isAroundFirstClick(x, y) || types_[y][x] === TYPE_OF_MINE)
+      types_[y][x] = TYPE_OF_MINE
       console.log('init Types: ', x, y)
     }
     // console.log(JSON.parse(JSON.stringify(types_)))
@@ -111,13 +113,13 @@ function App() {
           if (y > 0) {
             if (x > 0) {
               console.log(types_[y-1][x-1])
-              count += types_[y-1][x-1]>=9 ? 1 : 0
+              count += types_[y-1][x-1] === TYPE_OF_MINE ? 1 : 0
             }
             console.log(types_[y-1][x])
             count += types_[y-1][x]>=9 ? 1 : 0
             if (x < LENGTH_TABLE_SIZE-1) {
               console.log(types_[y-1][x+1])
-              count += types_[y-1][x+1]>=9 ? 1 : 0
+              count += types_[y-1][x+1] === TYPE_OF_MINE ? 1 : 0
             }
           }
           
@@ -127,17 +129,17 @@ function App() {
             }
             count += types_[y][x]>=9 ? 1 : 0
             if (x < LENGTH_TABLE_SIZE-1) {
-              count += types_[y][x+1]>=9 ? 1 : 0
+              count += types_[y][x+1] === TYPE_OF_MINE ? 1 : 0
             }
           }
           
           if (y < LENGTH_TABLE_SIZE-1) {
             if (x > 0) {
-              count += types_[y+1][x-1]>=9 ? 1 : 0
+              count += types_[y+1][x-1] === TYPE_OF_MINE ? 1 : 0
             }
             count += types_[y+1][x]>=9 ? 1 : 0
             if (x < LENGTH_TABLE_SIZE-1) {
-              count += types_[y+1][x+1]>=9 ? 1 : 0
+              count += types_[y+1][x+1] === TYPE_OF_MINE ? 1 : 0
             }
           }
           types_[y][x] = count

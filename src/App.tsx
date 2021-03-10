@@ -112,13 +112,10 @@ function App() {
           let count = 0
           if (y > 0) {
             if (x > 0) {
-              console.log(types_[y-1][x-1])
               count += types_[y-1][x-1] === TYPE_OF_MINE ? 1 : 0
             }
-            console.log(types_[y-1][x])
             count += types_[y-1][x]>=9 ? 1 : 0
             if (x < LENGTH_TABLE_SIZE-1) {
-              console.log(types_[y-1][x+1])
               count += types_[y-1][x+1] === TYPE_OF_MINE ? 1 : 0
             }
           }
@@ -153,6 +150,10 @@ function App() {
     if (gameStatus === 'YET') {
       setMine(x, y, 5)
     }
+    openCell(x, y)
+  }
+
+  const openCell = (x: number, y: number) => {
     console.log('open: ',x,y,status[y][x],'->',!status[y][x])
     const status_ = JSON.parse(JSON.stringify(status))
     status_[y][x] = !status_[y][x]

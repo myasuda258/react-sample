@@ -150,13 +150,22 @@ function App() {
     if (gameStatus === 'YET') {
       setMine(x, y, 5)
     }
-    openCell(x, y)
+    let list_of_open_cell = generate_list_of_open_cell(x, y)
+    openCell(list_of_open_cell)
   }
 
-  const openCell = (x: number, y: number) => {
-    console.log('open: ',x,y,status[y][x],'->',!status[y][x])
+  const generate_list_of_open_cell = (x: number ,y: number) => {
+    return [[x, y]]
+  }
+
+  const openCell = (list: number[][]) => {
     const status_ = JSON.parse(JSON.stringify(status))
-    status_[y][x] = !status_[y][x]
+    list.forEach(cell => {
+      const x = cell[0]
+      const y = cell[1]
+      console.log('open: ',x,y,status[y][x],'->',!status[y][x])
+      status_[y][x] = !status_[y][x]
+    })
     setStatus(status_)
   }
 

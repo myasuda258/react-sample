@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Cell } from './components/Cell';
+import Cells from './types/Cells'
 
 const LENGTH_TABLE_SIZE = 5
 const NUMBER_OF_MINES = 5
@@ -155,14 +156,15 @@ function App() {
   }
 
   const generate_list_of_open_cell = (x: number ,y: number) => {
-    return [[x, y]]
+    const center: Cells = {x,y}
+    return [center]
   }
 
-  const openCell = (list: number[][]) => {
+  const openCell = (list: Cells[]) => {
     const status_ = JSON.parse(JSON.stringify(status))
     list.forEach(cell => {
-      const x = cell[0]
-      const y = cell[1]
+      const x = cell.x
+      const y = cell.y
       console.log('open: ',x,y,status[y][x],'->',!status[y][x])
       status_[y][x] = !status_[y][x]
     })

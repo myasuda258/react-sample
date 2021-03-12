@@ -83,9 +83,9 @@ function App() {
     return ng_list
   }
 
-  const setMine = (x_clicked: number, y_clicked: number, num: number) => {
-    const list_ng_x = generateNgList(x_clicked)
-    const list_ng_y = generateNgList(y_clicked)
+  const setMine = (cell_clicked: Cells, num: number) => {
+    const list_ng_x = generateNgList(cell_clicked.x)
+    const list_ng_y = generateNgList(cell_clicked.y)
     
     let x,y
     const types_: number[][] = JSON.parse(JSON.stringify(initialTypes))
@@ -147,16 +147,15 @@ function App() {
     setTypes(types_)
   }
 
-  const handleCellClick = function(x:number, y:number) {
+  const handleCellClick = function(cell_clicked: Cells) {
     if (gameStatus === 'YET') {
-      setMine(x, y, 5)
+      setMine(cell_clicked, 5)
     }
-    let list_of_open_cell = generate_list_of_open_cell(x, y)
+    let list_of_open_cell = generate_list_of_open_cell(cell_clicked)
     openCell(list_of_open_cell)
   }
 
-  const generate_list_of_open_cell = (x: number ,y: number) => {
-    const center: Cells = {x,y}
+  const generate_list_of_open_cell = (center: Cells) => {
     return [center]
   }
 
